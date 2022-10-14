@@ -1,0 +1,13 @@
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-form {
+  min-width: 50px;
+  max-width: 150px;
+  width: 100%;
+  .example-full-width {
+    width: 100%;
+  }
+}
