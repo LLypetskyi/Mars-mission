@@ -17,11 +17,15 @@ export class SelectComponent implements OnInit {
   selectedCamera?: IRoverCamera | null;
 
   onRoverSelected(rover: IRover) {
-    console.log(rover);
+    // console.log(rover);
     this.selectedCamera = null;
   }
 
   solFormControl = new FormControl('', Validators.min(1));
+
+  showImages() {
+
+  }
 
   constructor() { }
 
