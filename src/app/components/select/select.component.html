@@ -1,33 +1,50 @@
 <div class="fields">
-  
   <mat-form-field appearance="fill">
     <mat-label>Rover</mat-label>
-    <mat-select [(ngModel)]="selectedRover" (ngModelChange)="onRoverSelected($event)">
-      <mat-option *ngFor="let rover of rovers" [value]="rover">{{rover.title}}</mat-option>
+    <mat-select
+      [(ngModel)]="selectedRover"
+      (ngModelChange)="onRoverSelected($event)"
+    >
+      <mat-option *ngFor="let rover of rovers" [value]="rover">{{
+        rover.title
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Camera</mat-label>
-    <mat-select [(ngModel)]="selectedCamera" [disabled]="selectedRover == null">
-      <mat-option *ngFor="let camera of selectedRover?.cameras" [value]="camera">{{camera.title}}</mat-option>
+    <mat-select [(ngModel)]="selectedCamera" 
+    [disabled]="selectedRover == null"
+    (ngModelChange)="onSelectedCamera($event)">
+      <mat-option
+        *ngFor="let camera of selectedRover?.cameras"
+        [value]="camera"
+        >{{ camera.title }}</mat-option
+      >
     </mat-select>
   </mat-form-field>
-  <br>
 
   <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Sol (Mars day)</mat-label>
-      <input type="number" matInput placeholder="Sol(Mars day)" value="1" [formControl]="solFormControl">
+      <input
+        type="number"
+        matInput
+        placeholder="Sol(Mars day)"
+        [(ngModel)]="selectedSol"
+        (ngModelChange)="onSelectedSol($event)"
+        value=""
+        [formControl]="solFormControl"
+      />
       <mat-error *ngIf="solFormControl">
         The Sun (Mars day) must be greater than zero
       </mat-error>
     </mat-form-field>
   </form>
-
 </div>
 
-
 <div class="example-button-row">
-  <button mat-stroked-button color="primary" (click)="showImages()">Let's go!</button>
+  <button mat-stroked-button color="primary" (click)="showImages()">
+    Let's go!
+  </button>
 </div>

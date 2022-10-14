@@ -15,10 +15,21 @@ export class SelectComponent implements OnInit {
   rovers = rovers;
   selectedRover?: IRover;
   selectedCamera?: IRoverCamera | null;
+  selectedSol?: number;
+
+
 
   onRoverSelected(rover: IRover) {
-    // console.log(rover);
+    console.log(rover);
     this.selectedCamera = null;
+  }
+
+  onSelectedCamera(selectedCamera: IRoverCamera) {
+    console.log("selected camera is =>", selectedCamera);
+
+  }
+  onSelectedSol(num: number) {
+    console.log("selectedSol =>", this.selectedSol);
   }
 
   solFormControl = new FormControl('', Validators.min(1));
