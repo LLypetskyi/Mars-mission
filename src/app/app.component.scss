@@ -2,6 +2,11 @@
   width: 100%;
   margin: 0 auto;
   height: 100%;
+  section.title {
+    width: 100%;
+    padding-top: 120px;
+    padding-left: 190px;
+  }
   section.header {
     width: 100%;
     display: flex;
@@ -10,8 +15,7 @@
     padding: 16px;
     gap: 33px;
     position: absolute;
-    width: 1440px;
-    height: 56px;
+    height: 30px;
     left: 0px;
     top: 0px;
     background: #6200ee;
@@ -29,14 +33,16 @@
   section.main {
     width: 100%;
     display: flex;
-    padding-top: 120px;
-    .main-left{
+    
+    .main-left {
       width: 30%;
       padding-left: 190px;
+    
     }
-    .main-right{
+    .main-right {
       width: 70%;
       padding-top: 40px;
+      text-align: center;
     }
   }
 }

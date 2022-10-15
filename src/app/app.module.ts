@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SelectComponent } from './components/select/select.component';
 import { PhotoComponent } from './components/photo/photo.component';
+import { TitleComponent } from './components/title/title.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { PhotoComponent } from './components/photo/photo.component';
     AppComponent,
     HeaderComponent,
     SelectComponent,
-    PhotoComponent
+    PhotoComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,9 @@
-.select-hero {
-  font-family: "Roboto";
-  font-weight: 300;
-  font-size: 64px;
-  line-height: 112px;
-  vertical-align: Top;
-  letter-spacing: -1.5px;
-  margin-bottom: 80px;
-  color: #000000;
+
   .select-fields{
     display: flex;
     flex-direction: column;
     padding-right: 100px;
   }
-}
-
 
 .example-button-row {
   display: table-cell;
