@@ -1,18 +1,29 @@
-.fields{
-  display: flex;
+.select-hero {
+  font-family: "Roboto";
+  font-weight: 300;
+  font-size: 64px;
+  line-height: 112px;
+  vertical-align: Top;
+  letter-spacing: -1.5px;
+  margin-bottom: 80px;
+  color: #000000;
+  .select-fields{
+    display: flex;
+    flex-direction: column;
+    padding-right: 100px;
+  }
 }
+
 
 .example-button-row {
   display: table-cell;
-  width: 490px;
+  padding-top: 50px;
 }
 
-.example-form {
-  min-width: 50px;
-  max-width: 150px;
-  width: 100%;
-  .example-full-width {
-    width: 100%;
-  }
-}
+// .example-form {
+//   max-width: 90%;
+//   width: 90%;
+//   .example-full-width {
+//     width: 90%;
+//   }
 
