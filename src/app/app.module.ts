@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +33,7 @@ import { TitleComponent } from './components/title/title.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
