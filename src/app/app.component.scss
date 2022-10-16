@@ -1,7 +1,8 @@
 .container {
-  width: 100%;
-  margin: 0 auto;
+  width: 86%;
   height: 100%;
+  margin: 0 auto;
+  font-family: Titillium Web;
   section.title {
     width: 100%;
     padding-top: 120px;
@@ -18,12 +19,12 @@
     height: 30px;
     left: 0px;
     top: 0px;
-    background: #6200ee;
+    background: midnightblue;
     .header-text {
       height: 25px;
-      font-family: "Roboto";
+      font-family: Titillium Web;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 20px;
       line-height: 24px;
       letter-spacing: 0.15px;

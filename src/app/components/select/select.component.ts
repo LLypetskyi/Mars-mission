@@ -34,9 +34,7 @@ export class SelectComponent implements OnInit {
 
   solFormControl = new FormControl('', Validators.min(1));
 
-  showImages() {
-
-  }
+  getMarsPhotos() { }
 
   constructor() { }
 
