@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GetImagesService } from './get-images.service';
+import { NasaApiService } from './nasa-api.service';
 
-describe('GetImagesService', () => {
-  let service: GetImagesService;
+describe('NasaApiService', () => {
+  let service: NasaApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GetImagesService);
+    service = TestBed.inject(NasaApiService);
   });
 
   it('should be created', () => {
