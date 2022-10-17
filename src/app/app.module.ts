@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SelectComponent } from './components/select/select.component';
 import { PhotoComponent } from './components/photo/photo.component';
 import { TitleComponent } from './components/title/title.component';
+import { NasaApiService } from './services/nasa-api.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { TitleComponent } from './components/title/title.component';
     ReactiveFormsModule,
     MatCardModule,
   ],
-  providers: [],
+  providers: [NasaApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@ export interface IPhoto {
   id: number;
   sol: number;
   camera: IPhotoCamera;
-  img_src: string;
-  earth_date: string;
+  imgSrc: string;
+  earthDate: string;
   rover: IPhotoRover;
 }

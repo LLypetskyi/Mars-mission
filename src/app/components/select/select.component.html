@@ -2,10 +2,7 @@
   <div class="select-rover">
     <mat-form-field appearance="fill">
       <mat-label>Rover</mat-label>
-      <mat-select
-        [(ngModel)]="selectedRover"
-        (ngModelChange)="onRoverSelected($event)"
-      >
+      <mat-select (selectionChange)="onRoverSelected($event.value)">
         <mat-option *ngFor="let rover of rovers" [value]="rover">
           {{ rover.title }}
         </mat-option>
@@ -17,12 +14,11 @@
     <mat-form-field appearance="fill">
       <mat-label>Camera</mat-label>
       <mat-select
-        [(ngModel)]="selectedCamera"
-        [disabled]="selectedRover == null"
-        (ngModelChange)="onSelectedCamera($event)"
+        (selectionChange)="onSelectedCamera($event.value)"
+        [disabled]="(selectedRover$ | async) == null"
       >
         <mat-option
-          *ngFor="let camera of selectedRover?.cameras"
+          *ngFor="let camera of (selectedRover$ | async)?.cameras"
           [value]="camera"
         >
           {{ camera.title }}
@@ -39,7 +35,6 @@
           type="number"
           matInput
           placeholder="Sol(Mars day)"
-          [(ngModel)]="selectedSol"
           (ngModelChange)="onSelectedSol($event)"
           value=""
           [formControl]="solFormControl"
