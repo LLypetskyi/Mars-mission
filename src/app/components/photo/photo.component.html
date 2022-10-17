@@ -1,10 +1,9 @@
 <div class="content">
   <div class="cards">
     <div class="example-card">
-      <img *ngFor="let item of items$ | async" [src]="item.imgSrc" [alt]="item.earthDate">
+      <img class="card" *ngFor="let item of items$ | async" [src]="item.imgSrc" [alt]="item.earthDate">
     </div>
   </div>
-
 
 
   <div class="example-button-row">
