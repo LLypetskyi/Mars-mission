@@ -15,7 +15,6 @@
       <mat-label>Camera</mat-label>
       <mat-select
         (selectionChange)="onSelectedCamera($event.value)"
-        [disabled]="(selectedRover$ | async) == null"
       >
         <mat-option
           *ngFor="let camera of (selectedRover$ | async)?.cameras"
@@ -39,9 +38,6 @@
           value=""
           [formControl]="solFormControl"
         />
-        <mat-error *ngIf="solFormControl">
-          The Sol (Mars day) must be greater than zero
-        </mat-error>
       </mat-form-field>
     </form>
   </div>

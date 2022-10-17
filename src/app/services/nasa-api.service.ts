@@ -16,8 +16,8 @@ export class NasaApiService {
   public getMarsPhotos(
     rover: IRover,
     camera: IRoverCamera,
+    sol: number,
     page: number,
-    sol: number
   ): Observable<IPhoto[]> {
     const demo_key: string = 'icVUpn1Ry49jsBLmHF94nB4d4GrnMWpnfQg0ZNtk';
     const baseUrl = 'https://api.nasa.gov';

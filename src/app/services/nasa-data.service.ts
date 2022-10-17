@@ -11,67 +11,75 @@ import { IRoverCamera } from '../interfaces/rover-camera';
 })
 export class NasaDataService {
 
-  constructor(private http: HttpClient, private NasaApiService: NasaApiService) { }
-
-  private pageNumber = 1;
-  private photosSubject = new BehaviorSubject<IPhoto[]>([]);
-  public photos$ = this.photosSubject.asObservable();
-
+  constructor(private http: HttpClient, private nasaApiService: NasaApiService) { }
 
   private selectedRoverSubject: BehaviorSubject<IRover | null> = new BehaviorSubject<IRover | null>(null);
-  public selectedRover$ = this.selectedRoverSubject.asObservable();
-
   private selectedCameraSubject: BehaviorSubject<IRoverCamera | null> = new BehaviorSubject<IRoverCamera | null>(null);
-  public selectedCamera$ = this.selectedCameraSubject.asObservable();
-
   private selectedSolSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
-  public selectedSol$ = this.selectedSolSubject.asObservable();
+  private photosSubject: BehaviorSubject<IPhoto[]> = new BehaviorSubject<IPhoto[]>([]);
+  private pageNumberSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
 
-  public getMarsPhoto(): void {
-    let oldPhotos = this.photosSubject.value;
-    let selectedRover = this.selectedRoverSubject?.value;
-    let selectedCamera = this.selectedCameraSubject?.value;
-    let selectedSol = this.selectedSolSubject?.value;
 
-    if (selectedCamera == null || selectedRover == null || selectedSol == null) {
-      console.log("The values are null. Can't make http request");
-      return;
-    }
-    this.NasaApiService.getMarsPhotos(selectedRover, selectedCamera, this.pageNumber, selectedSol)
-      .subscribe((photos) => {
-        this.setMarsPhotos([...oldPhotos, ...photos]);
-      });
-  }
 
-  public loadMore() {
-    this.pageNumber = this.pageNumber + 1;
-    this.getMarsPhoto();
-  }
+  public getSelectedRover$ = this.selectedRoverSubject.asObservable();
+  public getSelectedCamera$ = this.selectedCameraSubject.asObservable();
+  public getSelectedSol$ = this.selectedSolSubject.asObservable();
+  public getPhotos$ = this.photosSubject.asObservable();
+  public getPageNumber$ = this.pageNumberSubject.asObservable();
 
-  public cleanPhotos() {
-    this.pageNumber = 1;
-    this.setMarsPhotos([]);
-  }
 
-  public setMarsPhotos(photos: IPhoto[]) {
-    this.photosSubject.next(photos);
-  }
 
-  public selectRover(rover: IRover) {
+
+  public setSelectedRover(rover: IRover) {
     this.selectedRoverSubject.next(rover);
     this.cleanPhotos();
   }
-
-  public selectCamera(roverCamera: IRoverCamera) {
-    this.selectedCameraSubject.next(roverCamera);
+  
+  public setSelectedCamera(camera: IRoverCamera) {
+    this.selectedCameraSubject.next(camera);
     this.cleanPhotos();
   }
 
-  public selectSol(sol: number) {
+  public setSelectedSol(sol: number) {
     this.selectedSolSubject.next(sol);
     this.cleanPhotos();
+  }
 
+  public setPhotos(photos: IPhoto[]) {
+    this.photosSubject.next(photos);
+  }
+
+  public setPageNumber(pageNumber: number) {
+    this.pageNumberSubject.next(pageNumber);
   }
 
 
+
+  public cleanPhotos() {
+    this.setPageNumber(1);
+    this.setPhotos([]);
+  }
+
+
+  public getMarsPhotos() {
+    let selectedRover = this.selectedRoverSubject.value;
+    let selectedCamera = this.selectedCameraSubject.value;
+    let selectedSol = this.selectedSolSubject.value;
+    let pageNumber = this.pageNumberSubject.value;
+    let currentPhotos = this.photosSubject.value;
+
+    if (selectedRover == null || selectedCamera == null || selectedSol == null) {
+      console.log('Values are null. Can\'t make http request.')
+      return;
+    }
+
+    this.nasaApiService.getMarsPhotos(selectedRover, selectedCamera, selectedSol, pageNumber).subscribe((photos: IPhoto[]) => this.setPhotos([...currentPhotos, ...photos]));
+  }
+
+  public loadMore() {
+    let currentPageNumber = this.pageNumberSubject.value;
+    let nextPageNumber = currentPageNumber + 1;
+    this.setPageNumber(nextPageNumber);
+    this.getMarsPhotos();
+  }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NasaDataService } from '../../services/nasa-data.service';
+import { Observable } from 'rxjs';
+import { IPhoto } from 'src/app/interfaces/photo';
+import { NasaDataService } from 'src/app/services/nasa-data.service';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class PhotoComponent implements OnInit {
 
   constructor(private dataService: NasaDataService) { }
 
-  public items$ = this.dataService.photos$;
+  public photos$: Observable<IPhoto[]> = this.dataService.getPhotos$;
 
 ngOnInit(): void {
 }

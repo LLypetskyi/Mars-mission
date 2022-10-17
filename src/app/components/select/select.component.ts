@@ -3,45 +3,43 @@ import { FormControl, Validators } from "@angular/forms";
 
 import { rovers } from 'src/app/data/rovers';
 import { IRoverCamera } from 'src/app/interfaces/rover-camera';
+import { NasaDataService } from 'src/app/services/nasa-data.service';
 import { IRover } from '../../interfaces/rover';
-import { NasaDataService } from '../../services/nasa-data.service';
 
-@Component({
+@Component({ 
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
-
   rovers = rovers;
-  public selectedRover$ = this.dataService.selectedRover$;
-  public selectedCamera$ = this.dataService.selectedCamera$;
-  public selectedSol$ = this.dataService.selectedSol$;
 
   constructor(private dataService: NasaDataService) { }
 
-  onRoverSelected(rover: IRover) {
+  selectedRover$ = this.dataService.getSelectedRover$;
+
+  public onRoverSelected(rover: IRover) {
     console.log("rover =>", rover);
-    this.dataService.selectRover(rover);
+    this.dataService.setSelectedRover(rover);
   }
 
-  onSelectedCamera(selectedCamera: IRoverCamera) {
+  public onSelectedCamera(selectedCamera: IRoverCamera) {
     console.log("selected camera is =>", selectedCamera);
-    this.dataService.selectCamera(selectedCamera);
+    this.dataService.setSelectedCamera(selectedCamera);
 
   }
-  onSelectedSol(num: number) {
+  public onSelectedSol(num: number) {
     console.log("selectedSol =>", num);
-    this.dataService.selectSol(num);
+    this.dataService.setSelectedSol(num);
+  }
+
+  public ngOnInit(): void {
+  }
+
+  public getMarsPhotos():void {
+    this.dataService.getMarsPhotos();
   }
 
   solFormControl = new FormControl('', Validators.min(1));
-
-  getMarsPhotos() {
-    this.dataService.getMarsPhoto();
-  }
-
-  ngOnInit(): void {
-  }
 
 }
