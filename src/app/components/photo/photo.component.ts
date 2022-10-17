@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NasaDataService } from '../../services/nasa-data.service';
 
 
 @Component({
@@ -8,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoComponent implements OnInit {
 
-  
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+  constructor(private dataService: NasaDataService) { }
+
+  public items$ = this.dataService.photos$;
+
+ngOnInit(): void {
+}
+
+loadMore() {
+  this.dataService.loadMore();
+}
 
 }

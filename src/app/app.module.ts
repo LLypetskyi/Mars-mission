@@ -15,6 +15,8 @@ import { SelectComponent } from './components/select/select.component';
 import { PhotoComponent } from './components/photo/photo.component';
 import { TitleComponent } from './components/title/title.component';
 import { NasaApiService } from './services/nasa-api.service';
+import { NasaDataService } from './services/nasa-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,9 +36,13 @@ import { NasaApiService } from './services/nasa-api.service';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatCardModule,
   ],
-  providers: [NasaApiService],
+  providers: [
+    NasaApiService,
+    NasaDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

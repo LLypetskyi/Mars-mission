@@ -15,7 +15,7 @@ export class NasaDataService {
 
   private pageNumber = 1;
   private photosSubject = new BehaviorSubject<IPhoto[]>([]);
-  private photos$ = this.photoSubject.asObservable();
+  public photos$ = this.photosSubject.asObservable();
 
 
   private selectedRoverSubject: BehaviorSubject<IRover | null> = new BehaviorSubject<IRover | null>(null);
@@ -33,10 +33,11 @@ export class NasaDataService {
     let selectedCamera = this.selectedCameraSubject?.value;
     let selectedSol = this.selectedSolSubject?.value;
 
-    if (selectedCamera == null || selectedRover == null) {
+    if (selectedCamera == null || selectedRover == null || selectedSol == null) {
       console.log("The values are null. Can't make http request");
+      return;
     }
-    this.NasaApiService.getMarsPhotos(selectedRover, selectedCamera, this.pageNumber, this.selectedSol)
+    this.NasaApiService.getMarsPhotos(selectedRover, selectedCamera, this.pageNumber, selectedSol)
       .subscribe((photos) => {
         this.setMarsPhotos([...oldPhotos, ...photos]);
       });

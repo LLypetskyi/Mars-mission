@@ -1,8 +1,13 @@
-<mat-card class="example-card">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-</mat-card>
+<div class="content">
+  <div class="cards">
+    <div class="example-card">
+      <img *ngFor="let item of items$ | async" [src]="item.imgSrc" [alt]="item.earthDate">
+    </div>
+  </div>
 
 
-<div class="example-button-row">
-  <button mat-stroked-button color="primary">Load more...</button>
+
+  <div class="example-button-row">
+    <button mat-stroked-button color="primary" (click)="loadMore()">Load more...</button>
+  </div>
 </div>
