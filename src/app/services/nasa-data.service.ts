@@ -18,6 +18,9 @@ export class NasaDataService {
   private selectedSolSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   private photosSubject: BehaviorSubject<IPhoto[]> = new BehaviorSubject<IPhoto[]>([]);
   private pageNumberSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  private showMainLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private showLoadMoreLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private showLoadMoreSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
 
@@ -26,7 +29,9 @@ export class NasaDataService {
   public getSelectedSol$ = this.selectedSolSubject.asObservable();
   public getPhotos$ = this.photosSubject.asObservable();
   public getPageNumber$ = this.pageNumberSubject.asObservable();
-
+  public showMainLoading$ = this.showMainLoadingSubject.asObservable();
+  public showLoadMoreLoading$ = this.showLoadMoreLoadingSubject.asObservable();
+  public showLoadMore$ = this.showLoadMoreSubject.asObservable();
 
 
 
@@ -53,10 +58,21 @@ export class NasaDataService {
     this.pageNumberSubject.next(pageNumber);
   }
 
+  public setShowMainLoading(loading: boolean) {
+    this.showMainLoadingSubject.next(loading);
+  }
 
+  public setShowLoadMoreLoading(loading: boolean) {
+    this.showLoadMoreLoadingSubject.next(loading);
+  }
+
+  public setShowLoadMore(showLoadMore: boolean) {
+    this.showLoadMoreSubject.next(showLoadMore);
+  }
 
   public cleanPhotos() {
     this.setPageNumber(1);
+    this.setShowLoadMore(false);
     this.setPhotos([]);
   }
 
@@ -68,15 +84,40 @@ export class NasaDataService {
     let pageNumber = this.pageNumberSubject.value;
     let currentPhotos = this.photosSubject.value;
 
+    if (currentPhotos.length === 0) {
+      this.setShowMainLoading(true);
+    }
+
     if (selectedRover == null || selectedCamera == null || selectedSol == null) {
       console.log('Values are null. Can\'t make http request.')
       return;
     }
 
-    this.nasaApiService.getMarsPhotos(selectedRover, selectedCamera, selectedSol, pageNumber).subscribe((photos: IPhoto[]) => this.setPhotos([...currentPhotos, ...photos]));
+    this.nasaApiService.getMarsPhotos(selectedRover, selectedCamera, selectedSol, pageNumber)
+    .subscribe({
+        next: (photos) => {
+          if (photos.length > 0) {
+            this.setShowLoadMore(true);
+          }
+
+          if (photos.length < 25) {
+            this.setShowLoadMore(false);
+          }
+ 
+          this.setPhotos([...currentPhotos, ...photos]);
+          this.setShowMainLoading(false);
+          this.setShowLoadMoreLoading(false);
+        },
+        error: (error) => {
+          this.setShowMainLoading(false);
+          this.setShowLoadMoreLoading(false);
+        },
+      }
+    );
   }
 
   public loadMore() {
+    this.setShowLoadMoreLoading(true);
     let currentPageNumber = this.pageNumberSubject.value;
     let nextPageNumber = currentPageNumber + 1;
     this.setPageNumber(nextPageNumber);

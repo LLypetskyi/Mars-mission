@@ -6,26 +6,23 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SelectComponent } from './components/select/select.component';
-import { PhotoComponent } from './components/photo/photo.component';
-import { TitleComponent } from './components/title/title.component';
 import { NasaApiService } from './services/nasa-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NasaDataService } from './services/nasa-data.service';
+import { ContentComponent } from './components/content/content.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SelectComponent,
-    PhotoComponent,
-    TitleComponent
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +35,7 @@ import { NasaDataService } from './services/nasa-data.service';
     ReactiveFormsModule,
     HttpClientModule,
     MatCardModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     NasaApiService,
