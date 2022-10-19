@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
+
 import { rovers } from 'src/app/data/rovers';
 import { IPhoto } from 'src/app/interfaces/photo';
 import { IRover } from 'src/app/interfaces/rover';
@@ -17,6 +18,7 @@ import { NasaDataService } from 'src/app/services/nasa-data.service';
 export class ContentComponent implements OnInit {
   rovers = rovers;
   public solFormControl = new FormControl('', Validators.min(1));
+  
   public selectedRover$ = this.dataService.getSelectedRover$;
   public photos$: Observable<IPhoto[]> = this.dataService.getPhotos$;
   public showMainLoading$: Observable<boolean> = this.dataService.showMainLoading$;
@@ -25,7 +27,7 @@ export class ContentComponent implements OnInit {
   public showLoadMore$: Observable<boolean> = this.dataService.showLoadMore$;
   public color: ThemePalette = 'primary';
   public mode: ProgressSpinnerMode = 'indeterminate';
-  public value = 50; 
+  public value = 50;
 
 
   constructor(private dataService: NasaDataService) { }
@@ -48,7 +50,7 @@ export class ContentComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  public getMarsPhotos():void {
+  public getMarsPhotos(): void {
     this.dataService.getMarsPhotos();
   }
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NasaApiService } from './nasa-api.service';
 import { BehaviorSubject } from 'rxjs';
+
+import { NasaApiService } from './nasa-api.service';
 import { IRover } from '../interfaces/rover';
 import { IPhoto } from '../interfaces/photo';
 import { IRoverCamera } from '../interfaces/rover-camera';
@@ -39,7 +40,7 @@ export class NasaDataService {
     this.selectedRoverSubject.next(rover);
     this.cleanPhotos();
   }
-  
+
   public setSelectedCamera(camera: IRoverCamera) {
     this.selectedCameraSubject.next(camera);
     this.cleanPhotos();
@@ -94,7 +95,7 @@ export class NasaDataService {
     }
 
     this.nasaApiService.getMarsPhotos(selectedRover, selectedCamera, selectedSol, pageNumber)
-    .subscribe({
+      .subscribe({
         next: (photos) => {
           if (photos.length > 0) {
             this.setShowLoadMore(true);
@@ -103,7 +104,7 @@ export class NasaDataService {
           if (photos.length < 25) {
             this.setShowLoadMore(false);
           }
- 
+
           this.setPhotos([...currentPhotos, ...photos]);
           this.setShowMainLoading(false);
           this.setShowLoadMoreLoading(false);
@@ -113,7 +114,7 @@ export class NasaDataService {
           this.setShowLoadMoreLoading(false);
         },
       }
-    );
+      );
   }
 
   public loadMore() {
