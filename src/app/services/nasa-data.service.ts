@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 import { NasaApiService } from './nasa-api.service';
@@ -12,7 +11,7 @@ import { IRoverCamera } from '../interfaces/rover-camera';
 })
 export class NasaDataService {
 
-  constructor(private http: HttpClient, private nasaApiService: NasaApiService) { }
+  constructor(private nasaApiService: NasaApiService) { }
 
   private selectedRoverSubject: BehaviorSubject<IRover | null> = new BehaviorSubject<IRover | null>(null);
   private selectedCameraSubject: BehaviorSubject<IRoverCamera | null> = new BehaviorSubject<IRoverCamera | null>(null);

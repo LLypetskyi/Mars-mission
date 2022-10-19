@@ -14,7 +14,10 @@
         <mat-form-field appearance="fill">
           <mat-label>Camera</mat-label>
           <mat-select (selectionChange)="onSelectedCamera($event.value)">
-            <mat-option *ngFor="let camera of (selectedRover$ | async)?.cameras" [value]="camera">
+            <mat-option
+              *ngFor="let camera of (selectedRover$ | async)?.cameras"
+              [value]="camera"
+            >
               {{ camera.title }}
             </mat-option>
           </mat-select>
@@ -22,35 +25,70 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Sol (Mars day)</mat-label>
-          <input type="number" matInput placeholder="Sol(Mars day)" (ngModelChange)="onSelectedSol($event)" value=""
-            [formControl]="solFormControl" />
-          <mat-error *ngIf="solFormControl">The number must be greater than 0</mat-error>
+          <input
+            type="number"
+            matInput
+            placeholder="Sol(Mars day)"
+            (ngModelChange)="onSelectedSol($event)"
+            value=""
+            [formControl]="solFormControl"
+          />
+          <mat-error *ngIf="solFormControl"
+            >The number must be greater than 0</mat-error
+          >
         </mat-form-field>
 
-        <button *ngIf="(photos$ | async)?.length === 0" class="btn-primary" (click)="getMarsPhotos()">
+        <button
+          *ngIf="(photos$ | async)?.length === 0"
+          class="btn-primary"
+          (click)="getMarsPhotos()"
+        >
           Show
         </button>
       </form>
 
       <div class="results">
-        <div *ngIf="!(showMainLoading$ | async) && (photos$ | async)?.length === 0">
+        <div
+          *ngIf="!(showMainLoading$ | async) && (photos$ | async)?.length === 0"
+        >
           Let's start exploring NASA`s expeditions to Mars. <br />
           Please select values on the right panel to show mars photos.
         </div>
 
-        <mat-progress-spinner *ngIf="showMainLoading$ | async" class="example-margin" [color]="color" [mode]="mode"
-          [value]="value" [diameter]="60">
+        <mat-progress-spinner
+          *ngIf="showMainLoading$ | async"
+          class="example-margin"
+          [color]="color"
+          [mode]="mode"
+          [value]="value"
+          [diameter]="60"
+        >
         </mat-progress-spinner>
-        <div *ngIf="(photos$ | async)?.length !== 0" class="photos">
-          <img *ngFor="let item of photos$ | async" [src]="item.imgSrc" [alt]="item.earthDate" />
-          <div class="load-more-loading">
-            <mat-progress-spinner *ngIf="showLoadMoreLoading$ | async" class="example-margin" [color]="color"
-              [mode]="mode" [value]="value" [diameter]="60">
-            </mat-progress-spinner>
 
+        <div *ngIf="(photos$ | async)?.length !== 0" class="photos">
+          <img
+            *ngFor="let item of photos$ | async"
+            [src]="item.imgSrc"
+            [alt]="item.earthDate"
+          />
+          <div class="load-more-loading">
+            <mat-progress-spinner
+              *ngIf="showLoadMoreLoading$ | async"
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+              [diameter]="60"
+            >
+            </mat-progress-spinner>
           </div>
         </div>
-        <button *ngIf="showLoadMore$ | async" class="btn-primary" (click)="loadMore()">
+
+        <button
+          *ngIf="showLoadMore$ | async"
+          class="btn-primary"
+          (click)="loadMore()"
+        >
           Load More
         </button>
       </div>
