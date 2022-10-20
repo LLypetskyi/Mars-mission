@@ -13,7 +13,10 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Camera</mat-label>
-          <mat-select (selectionChange)="onSelectedCamera($event.value)" [value]="(selectedCamera$ | async)">
+          <mat-select
+            (selectionChange)="onSelectedCamera($event.value)"
+            [value]="selectedCamera$ | async"
+          >
             <mat-option
               *ngFor="let camera of (selectedRover$ | async)?.cameras"
               [value]="camera"
@@ -39,7 +42,12 @@
         </mat-form-field>
 
         <button
-          *ngIf="(photos$ | async)?.length === 0 && (selectedRover$ | async) != null && (selectedCamera$ | async) != null && (selectedSol$ | async) != null"
+          *ngIf="
+            (photos$ | async)?.length === 0 &&
+            (selectedRover$ | async) != null &&
+            (selectedCamera$ | async) != null &&
+            (selectedSol$ | async) != null
+          "
           class="btn-primary"
           (click)="getMarsPhotos()"
         >
@@ -54,7 +62,7 @@
         >
           Let's start exploring NASA`s expeditions to Mars. <br />
           Please select values on the right panel to show mars photos.
-      </p>
+        </p>
 
         <mat-progress-spinner
           *ngIf="showMainLoading$ | async"
@@ -70,9 +78,8 @@
             [src]="item.imgSrc"
             [alt]="item.earthDate"
           />
-          <div class="load-more-loading">
+          <div class="load-more-loading" *ngIf="showLoadMoreLoading$ | async">
             <mat-progress-spinner
-              *ngIf="showLoadMoreLoading$ | async"
               class="example-margin"
               [mode]="mode"
               [diameter]="60"
