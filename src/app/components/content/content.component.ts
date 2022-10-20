@@ -20,20 +20,21 @@ export class ContentComponent implements OnInit {
   public solFormControl = new FormControl('', Validators.min(1));
   
   public selectedRover$ = this.dataService.getSelectedRover$;
+  public selectedCamera$ = this.dataService.getSelectedCamera$;
+  public selectedSol$ = this.dataService.getSelectedSol$;
   public photos$: Observable<IPhoto[]> = this.dataService.getPhotos$;
+  
   public showMainLoading$: Observable<boolean> = this.dataService.showMainLoading$;
   public showLoadMoreLoading$: Observable<boolean> = this.dataService.showLoadMoreLoading$;
-
   public showLoadMore$: Observable<boolean> = this.dataService.showLoadMore$;
-  public color: ThemePalette = 'primary';
-  public mode: ProgressSpinnerMode = 'indeterminate';
-  public value = 50;
 
+  public mode: ProgressSpinnerMode = 'indeterminate';
 
   constructor(private dataService: NasaDataService) { }
 
   public onRoverSelected(rover: IRover) {
     console.log("rover =>", rover);
+    this.dataService.setSelectedCamera(null);
     this.dataService.setSelectedRover(rover);
   }
 
@@ -57,5 +58,4 @@ export class ContentComponent implements OnInit {
   public loadMore() {
     this.dataService.loadMore();
   }
-
 }

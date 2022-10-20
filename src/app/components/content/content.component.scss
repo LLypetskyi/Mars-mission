@@ -31,6 +31,10 @@ form {
     justify-content: center;
     align-items: center;
 
+    .content-text {
+        text-align: center;
+    }
+
     .photos {
         width: 100%;
         display: grid;
@@ -78,7 +82,6 @@ form {
     main {
         padding: 20px 0;
         height: auto;
-        box-sizing: border-box;
     }
 
     .content {
@@ -86,7 +89,7 @@ form {
     }
 
     form {
-        width: 100%;
+         width: 100%;
     }
 
     .results {
@@ -97,20 +100,6 @@ form {
 }
 
 @media screen and (max-width: 480px) {
-    main {
-        padding: 20px 0;
-        height: auto;
-        box-sizing: border-box;
-    }
-
-    .content {
-        flex-direction: column;
-    }
-
-    form {
-        width: 100%;
-    }
-
     .results {
         .photos {
             grid-template-columns: 1fr;

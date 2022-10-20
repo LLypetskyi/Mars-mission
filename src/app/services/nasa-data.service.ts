@@ -18,6 +18,7 @@ export class NasaDataService {
   private selectedSolSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   private photosSubject: BehaviorSubject<IPhoto[]> = new BehaviorSubject<IPhoto[]>([]);
   private pageNumberSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+
   private showMainLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private showLoadMoreLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private showLoadMoreSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -29,6 +30,7 @@ export class NasaDataService {
   public getSelectedSol$ = this.selectedSolSubject.asObservable();
   public getPhotos$ = this.photosSubject.asObservable();
   public getPageNumber$ = this.pageNumberSubject.asObservable();
+
   public showMainLoading$ = this.showMainLoadingSubject.asObservable();
   public showLoadMoreLoading$ = this.showLoadMoreLoadingSubject.asObservable();
   public showLoadMore$ = this.showLoadMoreSubject.asObservable();
@@ -40,7 +42,7 @@ export class NasaDataService {
     this.cleanPhotos();
   }
 
-  public setSelectedCamera(camera: IRoverCamera) {
+  public setSelectedCamera(camera: IRoverCamera | null) {
     this.selectedCameraSubject.next(camera);
     this.cleanPhotos();
   }
@@ -58,6 +60,9 @@ export class NasaDataService {
     this.pageNumberSubject.next(pageNumber);
   }
 
+
+
+  
   public setShowMainLoading(loading: boolean) {
     this.showMainLoadingSubject.next(loading);
   }
